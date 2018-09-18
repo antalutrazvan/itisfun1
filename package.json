@@ -1,0 +1,24 @@
+{
+  "name": "itisfun1",
+  "version": "1.0.0",
+  "description": "Bytex It is fun session one",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "mdx-deck deck.mdx"
+  },
+  "keywords": [
+    "traning",
+    "scopes",
+    "functions",
+    "closure",
+    "hoisting"
+  ],
+  "author": "Antalut Razvan",
+  "license": "MIT",
+  "devDependencies": {
+    "mdx-deck": "^1.7.4",
+    "mdx-deck-code-surfer": "^0.4.1",
+    "raw-loader": "^0.5.1"
+  }
+}

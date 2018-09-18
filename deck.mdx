@@ -1,0 +1,197 @@
+export { future as theme } from 'mdx-deck/themes'
+import { CodeSurfer } from "mdx-deck-code-surfer"
+import oceanicNext from "prism-react-renderer/themes/oceanicNext"
+
+# ITisFun 
+
+## Session One
+
+Let's talk about some fun, but often confusing topics:
+
+- [ ] Scope
+- [ ] Closures
+- [ ] Hoisting
+
+---
+## Scope
+
+"Scope refers to the `part` of a program where a `variable` (or `name binding`) can be defined and is visible."
+
+---
+What's a name binding you may ask? 
+
+---
+<CodeSurfer 
+theme={oceanicNext}
+notes="what are name bindings? "
+dark="true"
+code={require("raw-loader!./snippets/vars.jsx")}
+steps={[
+  { lines: [3, 4, 5], notes: "variable declaration"},
+  { lines: [8, 9, 10], notes: "function declaration" }
+]}  
+/>
+
+---
+
+Now that that's out of the way, let's get back to **scope**.
+
+---
+ *Scope* can be:
+- global
+- file
+- module
+- function 
+- block
+---
+Javascript has `global` and `function` scopes.
+
+`block` scope was added as part of the `ES6` spec using `let`.
+
+---
+<CodeSurfer 
+title="Global Scope"
+theme={oceanicNext}
+notes="global scope"
+dark="true"
+code={require("raw-loader!./snippets/global_cards.html")}
+steps={[
+  { lines: [1,2,4,5,6,9], notes: "let's load 2 separate scripts"},
+  { range: [1,3], notes: "One with an array of cards"},
+  { lines: [7], notes: "And one to log it" },
+  { lines: [8], notes: "`cards` is visible" },
+  { lines: [8], notes: "because it was defined in the global scope" },
+  { lines: [8], notes: "it can also be accessed through: `window.cards`" }
+]}  
+/>
+---
+We can throw a wrench in this, by creating a `function`.
+---
+Let's look at a definition of what function scope is, and then modify our previous snippet.
+---
+### Function Scope
+
+A `function` `body` will automatically define a `variable` or `name context` when it it `called`.
+
+---
+<CodeSurfer 
+title="Function Scope"
+theme={oceanicNext}
+notes="function scope"
+dark="true"
+code={require("raw-loader!./snippets/local_cards.html")}
+steps={[
+  { lines: [1,2,8, 9,10,18], notes: "let's load 2 separate scripts again"},
+  { range: [3,7], notes: "One with a function that creates and returns some cards"},
+  { lines: [11, 13, 16], notes: "and one to call the function and log the array" },
+  { lines: [13, 14], notes: "`cards` is undefined in the global scope" },
+  { lines: [3, 4], notes: "it exists in the scope of `getSomeCards`" },
+  { lines: [11, 16, 17], notes: "our new variable `actualCards` is a reference to it" }
+]}  
+/>
+
+---
+### Achtung!
+
+An important feature to note is that nested function `scopes` are `chained`.
+
+What that means is that, an `inner function`, has access to all the variables of an `outer function`.
+But not the inverse.
+---
+<CodeSurfer 
+title="Scope Chaining"
+theme={oceanicNext}
+notes="chaning example"
+dark="true"
+code={require("raw-loader!./snippets/scope_chain.jsx")}
+steps={[
+  { lines: [1, 3, 4, 18], notes: "let's create a function to square a number" },
+  { lines: [1, 3, 4, 12, 16,  17], notes: "but because programmers are mischevious creatures" },
+  { lines: [6, 7, 9, 10, 18, 17], notes: "let's nest a function that will return 0 if the square is even" },
+  { lines: [4, 7, 12, 14], notes: "if we log each variable..." },
+  { lines: [4, 7, 12, 14, 15], notes: "we can see that secretResult is undefined" },
+]}  
+/>
+---
+
+Why could I `call` `square(6)` if I defined it after ?
+
+Well, it works because of `hoisting`.
+---
+### Hoisting
+
+ Hoisting is a nifty feature where `named` `function` declarations are moved to the `top` of the script.
+
+ It basically means that code will not work as you expect it to.
+---
+<CodeSurfer 
+title="Hoisting"
+theme={oceanicNext}
+notes="logger example"
+dark="true"
+code={require("raw-loader!./snippets/hoisting_logger.jsx")}
+steps={[
+  { lines: [8, 15], notes: "let's create a logger function" },
+  { lines: [1, 18], notes: "and call it two times with diffrent messages" },
+  { lines: [1, 3, 4, 12, 16,  17], notes: "but because programmers are mischevious creatures" },
+  { lines: [6, 7, 9, 10, 18, 17], notes: "let's nest a function that will return 0 if the square is even" },
+  { lines: [4, 7, 12, 14], notes: "if we log each variable..." },
+  { lines: [4, 7, 12, 14, 15], notes: "we can see that secretResult is undefined" },
+]}  
+/>
+---
+
+```html
+<script>
+  // global level
+  var john = "John";
+
+  callOutJhonny();
+
+  function callOutJhonny() { // new function scope
+    console.log(john); // John
+    
+    var johnny = "Johnny";
+
+    console.log(johnny); // Johnny
+  }
+
+  console.log(johnny); // undefined
+
+</script>
+---
+
+### Block scope
+  A programing language has `block` level scope, if a `{}` block (or some other form)
+  defines a variable scope.
+
+---
+
+```jsx
+ { // scope 1 
+   let counter = 2;
+
+  { //scope 2 
+   let counter = 3;
+     counter += 1; 
+
+     // we're in scope 2 so:
+     // counter === 4 
+   }
+
+    counter += 1;
+    // we're in scope 1 so:
+   // counter === 3
+  }
+```
+
+---
+## Functions
+
+`"subroutines"`
+
+ - they are groups of statements or expressions - `function body`
+ - that can be `called` - either externaly or internaly (recursion)
+ - they can recieve `arguments` for each `call` and can `return` a value at any point during execution.
+---
+# Fin...
