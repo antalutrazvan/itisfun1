@@ -1,24 +1,25 @@
 logger("StarCraft Strategy Guide Started");
 /**
-Logger-2 at 18/09/2018, 18:18:39
+default_logger at 15/09/2018, 18:18:39
   
   StarCraft Strategy Guide Started  
 */
 
-function logger(msg = "", level="info", api = console) {
-  api[level](
-    `logger at ${new Date().toLocaleString()}
+setTimeout(function() {
+  logger("You must construct additional Pylons", "warn");
+  /**
+  default_logger at 15/09/2018, 18:19:39
+    
+     Must construct additional Pylons
+  */
+}, 60000)
+
+function logger(msg = "", level="info", name="default_logger" ) {
+  console[level](
+    `default_logger at ${new Date().toLocaleString()}
 
       ${msg} 
     `
   );
 };
 
-setTimeout(function() {
-  logger("Must construct additional Pylons", "warn");
-  /**
-  logger-2 at 18/09/2018, 18:18:39
-    
-     Must construct additional Pylons
-  */
-}, 60000)

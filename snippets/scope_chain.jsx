@@ -3,8 +3,8 @@ const sixSquared = square(6);
 function square(number) {
   const squared = number * number;
 
-  function nullIfEven() {
-    const secretResult = squared % 2 ? 0 : squared;
+  function nullIfOdd() {
+    const secretResult = squared % 2 ? squared : 0 ;
 
     return secretResult;
   }
@@ -12,7 +12,7 @@ function square(number) {
   const result = nullIfEven();
 
   console.log(secretResult, squared, result);
-  // undefined, 36, 0
+  // undefined, 36, 36
 
   return result;
 }
