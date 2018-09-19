@@ -1,0 +1,22 @@
+<ul id="list"></ul>
+<script>
+  const data = ["one", "two", "three"];
+  const listNode = document.getElementById("list");
+
+  data.forEach((item) => {
+    let itemNode = document.createElement('li');
+
+    itemNode.innerHTML = item;
+    listNode.appendChild(itemNode);
+
+    itemNode.addEventListener('click', () => {
+      console.log(`clicked on ${item}`)
+    });
+  });
+</script>
+<!-- 
+  Our HTML will look like:
+    * one
+    * two
+    * three
+ -->

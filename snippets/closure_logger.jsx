@@ -16,7 +16,17 @@ function createLogger(name, level, api) {
 }
 
 const errorLogger = createLogger("ERR-LOG", "error");
-const fileErrorLogger = createLogger("FS-ERR-LOG", "error", fileLoggingAPI);
+const warningLogger = createLogger("WRN-LOG", "warn");
 
 errorLogger("This is confusing.");
-fileErrorLogger("But not really.");
+/**
+  ERR-LOG at 19/09/2018, 11:36:48
+
+    But not really.
+ */
+warningLogger("But not really.");
+/**
+  FS-WRN-LOG at 19/09/2018, 11:36:48
+
+    But not really. 
+ */

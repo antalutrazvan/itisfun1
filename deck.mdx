@@ -2,9 +2,11 @@ export { future as theme } from 'mdx-deck/themes'
 import { CodeSurfer } from "mdx-deck-code-surfer"
 import oceanicNext from "prism-react-renderer/themes/oceanicNext"
 
-# ITisFun 
+# `ITisFun` 
 
-## Session One
+### Session One
+
+---
 
 Let's talk about some interesting, but often confusing topics:
 
@@ -44,9 +46,9 @@ Now that that's out of the way, let's get back to **scope**.
 - function 
 - block
 ---
-Javascript has `global` and `function` scopes.
+JavaScript has `global` and `function` scopes.
 
-`block` scope was added as part of the `ES6`.
+`block` scope was added as part of `ES6`.
 
 ---
 <CodeSurfer 
@@ -155,11 +157,31 @@ Well, it works because of `hoisting`.
 ---
 ### Hoisting
 
-Hoisting is a nifty feature where `named` `function` declarations are moved to the `top` of the script.
+Hoisting is a feature where `variable` and `named` `function` declarations are moved to the `top` of their scope.
 
 ---
 <CodeSurfer 
-title="Hoisting"
+title="Hoisting - Variable"
+theme={oceanicNext}
+notes="simple message example"
+dark="true"
+code={require("raw-loader!./snippets/hoisting_simple.jsx")}
+steps={[
+  { lines: [1, 4, 6], notes: "lets take these 3 statements" },
+  { lines: [1], notes: "we log a `message` variable" },
+  { lines: [4], notes: "then declare, and assign a value to it." },
+  { lines: [6], notes: "then then log it again." },
+  { range: [1, 2], notes: "We would expect a ReferenceError at the first log" },
+  { range: [1, 7], notes: "but because of variable hoisting" },
+  { range: [9, 16], notes: "The interpeter will read this" },
+  { range: [18, 22], notes: "same behaviour for function scopes" },
+  { range: [25, 30], notes: "the interpreter will see" },
+  { range: [1, 30] },
+]}  
+/>
+---
+<CodeSurfer 
+title="Hoisting - Function"
 theme={oceanicNext}
 notes="logger example"
 dark="true"
@@ -171,16 +193,19 @@ steps={[
   { lines: [1, 9], notes: "We can call it here because it will be hoisted before execution" },
   { range: [1, 6], notes: "at first it will say" },
   { lines: [8, 15], notes: "and around the 1 minute mark" },
-  { range: [8, 15], notes: "it will tell you to get more supply" },
-  { range: [0, 24] },
+  { range: [8, 15], notes: "it will tell you to get more supply because you'll always forget to" },
+  { range: [1, 24] },
 ]}  
 />
 ---
 
-We can extend our logger to be able to create functions with preset names or levels.
+We can extend our logger to be able to create more of them, with preset names or levels.
 
 Doing this, we'll get to make use of `Closures`.
 
+---
+`closures` are the ability of an inner function to have access to the scope above them,
+even after the function that defined the scope has finished executing.
 ---
 <CodeSurfer 
 title="Closure"
@@ -189,16 +214,77 @@ notes="logger example"
 dark="true"
 code={require("raw-loader!./snippets/closure_logger.jsx")}
 steps={[
+  {lines: [1, 16], notes: "we'll create a function that recieves some parameters"},
+  {lines: [1,2,3,4,5,6, 16], notes: "creates a context object with those parameters"},
+  {range: [8, 15], notes: "and returns an anonymous version of our logger function"},
+  {range: [9, 14], notes: "which will reference that object and it's properties"},
+  {range: [1, 16], notes: "we can call this function later to get multiple types of loggers"},
+  {range: [1, 19], notes: "let's create 2 loggers"},
+  {range: [18, 32], notes: "then we can call them with whatever message we want"},
+  {range: [1, 32]},
 ]}  
 />
 ---
-
-## Functions
-
-`"subroutines"`
-
- - they are groups of statements or expressions - `function body`
- - that can be `called` - either externaly or internaly (recursion)
- - they can recieve `arguments` for each `call` and can `return` a value at any point during execution.
+ Here's a more simple example
 ---
-# Fin...
+<CodeSurfer 
+title="Closure - Extra"
+theme={oceanicNext}
+notes="list nodes example"
+dark="true"
+code={require("raw-loader!./snippets/list_extra.html")}
+steps={[
+  {lines: [1], notes: "lets create a list"},
+  {lines: [2, 16], notes: "and a script to modify that list"},
+  {lines: [3, 4], notes: "it has some data, and a reference to that list"},
+  {lines: [1, 6, 15], notes: "and for each entry"},
+  {lines: [1, 6, 15, 7], notes: "we create a `li` node"},
+  {lines: [1, 6, 15, 7,9 ], notes: "set its content"},
+  {lines: [1, 6, 7, 9, 10, 15], notes: "and add it to the list"},
+  {lines: [1, 6, 7, 9, 10, 12, 14, 15], notes: "afterwards we'll add a click listener"},
+  {lines: [1, 6, 7, 9, 10, 12, 13, 14, 15], notes: "that logs each item"},
+  {lines: [1, 6, 7, 9, 10, 12, 13, 14, 15, 17,18,19,20,21,22], notes: "when we click on each item, the value will be refrenced from the closure"},
+  {range: [1, 22]}
+]}  
+/>
+---
+  We can make use of our knowledge of `closures`, `hoisting` and `scopes` to create interesting scripts.
+  Closures for example are useful for creating `private` variables.
+---
+<CodeSurfer 
+title="Closure - Extra"
+theme={oceanicNext}
+notes="shared stack example"
+dark="true"
+code={require("raw-loader!./snippets/stack_extra.jsx")}
+steps={[
+  {lines: [1, 40], notes: "we'll create a function that recieves a context"},
+  {lines: [1, 40], notes: "and invoke it immediately"},
+  {lines: [1, 2 ], notes: "we'll define a stack (array)"},
+  {range: [15, 38], notes: "and some functions to interact with it"},
+  {lines: [1, 4,5,6,7,8,9,10,11,12,13], notes: "on the context (window in our case) we'll add a function to return an interface object"},
+  {lines: [1, 4,5,6,7,8,9,10,11,12,13], notes: "we could just set the object, but this is safer, as each call gets us a new interface"},
+  {lines: [42, 43], notes: "we can now get an interface instance" },
+  {range: [42, 48], notes: "and play around with it" },
+  {range: [51, 52], notes: "if we get another interface" },
+  {range: [51, 54 ], notes: "and play around with that" },
+  {range: [51, 58], notes: "we're modifing the shared `stack`" },
+  {range: [51, 59], notes: "which is kept in a closure" },
+  {range: [1, 59]},
+]}  
+/>
+---
+I encourage you to dig deeper into this, and experiment as much as you can.
+They are concepts that will help you greatly in understanding and writing code.
+And inch you closer to the goal of delivering better, more interesting products.
+---
+You can play around with these snippets, or make your own.
+And you can find out more about these concepts here:
+[https://hackernoon.com/execution-context-in-javascript-319dd72e8e2c](https://hackernoon.com/execution-context-in-javascript-319dd72e8e2c)
+[https://scotch.io/tutorials/understanding-hoisting-in-javascript](https://scotch.io/tutorials/understanding-hoisting-in-javascript)
+[https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8](https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8)
+
+Good reads:
+[JavaScript the Good Parts](http://shop.oreilly.com/product/9780596517748.do)
+---
+# Thank you

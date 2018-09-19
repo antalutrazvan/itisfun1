@@ -16,7 +16,7 @@ setTimeout(function() {
 
 function logger(msg = "", level="info", name="default_logger" ) {
   console[level](
-    `default_logger at ${new Date().toLocaleString()}
+    `${name} at ${new Date().toLocaleString()}
 
       ${msg} 
     `
