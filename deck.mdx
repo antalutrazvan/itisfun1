@@ -1,8 +1,8 @@
 export { future as theme } from 'mdx-deck/themes'
 import { CodeSurfer } from "mdx-deck-code-surfer"
-import oceanicNext from "prism-react-renderer/themes/oceanicNext"
+import nightOwl from "prism-react-renderer/themes/nightOwl"
 
-# `ITisFun` 
+# `IT should be Fun` 
 
 ### Session One
 
@@ -24,7 +24,7 @@ What's a name binding you may ask?
 
 ---
 <CodeSurfer 
-theme={oceanicNext}
+theme={nightOwl}
 notes="what are name bindings? "
 dark="true"
 code={require("raw-loader!./snippets/vars.jsx")}
@@ -53,7 +53,7 @@ JavaScript has `global` and `function` scopes.
 ---
 <CodeSurfer 
 title="Global Scope"
-theme={oceanicNext}
+theme={nightOwl}
 notes="global scope"
 dark="true"
 code={require("raw-loader!./snippets/global_cards.html")}
@@ -81,7 +81,7 @@ A programming language has function scope when:
 ---
 <CodeSurfer 
 title="Function Scope"
-theme={oceanicNext}
+theme={nightOwl}
 notes="function scope"
 dark="true"
 code={require("raw-loader!./snippets/local_cards.html")}
@@ -105,7 +105,7 @@ steps={[
 ---
 <CodeSurfer 
 title="Block Scope"
-theme={oceanicNext}
+theme={nightOwl}
 notes="simple block scope example"
 dark="true"
 code={require("raw-loader!./snippets/block_scope.jsx")}
@@ -135,7 +135,7 @@ But not the inverse.
 ---
 <CodeSurfer 
 title="Scope Chaining"
-theme={oceanicNext}
+theme={nightOwl}
 notes="square number example"
 dark="true"
 code={require("raw-loader!./snippets/scope_chain.jsx")}
@@ -162,7 +162,7 @@ Hoisting is a feature where `variable` and `named` `function` declarations are m
 ---
 <CodeSurfer 
 title="Hoisting - Variable"
-theme={oceanicNext}
+theme={nightOwl}
 notes="simple message example"
 dark="true"
 code={require("raw-loader!./snippets/hoisting_simple.jsx")}
@@ -182,24 +182,20 @@ steps={[
 ---
 <CodeSurfer 
 title="Hoisting - Function"
-theme={oceanicNext}
-notes="logger example"
-dark="true"
-code={require("raw-loader!./snippets/hoisting_logger.jsx")}
+theme={nightOwl}
+code={require("raw-loader!./snippets/hoisting_function.jsx")}
 steps={[
-  { lines: [17, 24], notes: "let's create a logger function" },
-  { range: [17, 24], notes: "that will log a pretty message" },
-  { lines: [1, 9], notes: "We'll call it two times with diferent messages" },
-  { lines: [1, 9], notes: "We can call it here because it will be hoisted before execution" },
-  { range: [1, 6], notes: "at first it will say" },
-  { lines: [8, 15], notes: "and around the 1 minute mark" },
-  { range: [8, 15], notes: "it will tell you to get more supply because you'll always forget to" },
-  { range: [1, 24] },
+  { lines: [1], notes: "this is how much money we have" },
+  { lines: [1, 9, 10, 11], notes: "this is a function to add some money to our bank" },
+  { lines: [1,3, 9, 10, 11], notes: "we can use add to add some money" },
+  { lines: [1,3,4, 9, 10, 11], notes: "even before we declared it" },
+  { lines: [1,3,4,5, 9, 10, 11], notes: "because it will be hoisted to the top of this scope" },
+  { lines: [1,3,4,5, 7, 9, 10, 11], notes: "at the end we'll have 25 RON" },
 ]}  
 />
 ---
 
-We can extend our logger to be able to create more of them, with preset names or levels.
+We can use this code to create a `wallet`. that will keep a private record of our money, and allow us to add to it.
 
 Doing this, we'll get to make use of `Closures`.
 
@@ -209,19 +205,19 @@ even after the function that defined the scope has finished executing.
 ---
 <CodeSurfer 
 title="Closure"
-theme={oceanicNext}
+theme={nightOwl}
 notes="logger example"
 dark="true"
-code={require("raw-loader!./snippets/closure_logger.jsx")}
+code={require("raw-loader!./snippets/closure_bank.jsx")}
 steps={[
-  {lines: [1, 16], notes: "we'll create a function that recieves some parameters"},
-  {lines: [1,2,3,4,5,6, 16], notes: "creates a context object with those parameters"},
-  {range: [8, 15], notes: "and returns an anonymous version of our logger function"},
-  {range: [9, 14], notes: "which will reference that object and it's properties"},
-  {range: [1, 16], notes: "we can call this function later to get multiple types of loggers"},
-  {range: [1, 19], notes: "let's create 2 loggers"},
-  {range: [18, 32], notes: "then we can call them with whatever message we want"},
-  {range: [1, 32]},
+  { lines: [1, 13], notes: "we'll create a `wallet` function that recieves an inital amount" },
+  { lines: [1, 2, 13], notes: "we'll keep a variable to store our `money` and set it to `amount`" },
+  { lines: [1, 2, 4,5,6, 13], notes: "we'll create a function to add a value to our current amount" },
+  { lines: [1, 2, 4,5,6, 8,9,10, 13], notes: "and one to view our current amount" },
+  { range: [1, 15], notes: "we can then create our wallet" },
+  { range: [1, 17], notes: "add to it" },
+  { range: [1, 18], notes: "and see how much we have" },
+  {range: [1, 18]},
 ]}  
 />
 ---
@@ -229,7 +225,7 @@ steps={[
 ---
 <CodeSurfer 
 title="Closure - Extra"
-theme={oceanicNext}
+theme={nightOwl}
 notes="list nodes example"
 dark="true"
 code={require("raw-loader!./snippets/list_extra.html")}
@@ -253,7 +249,7 @@ steps={[
 ---
 <CodeSurfer 
 title="Closure - Extra"
-theme={oceanicNext}
+theme={nightOwl}
 notes="shared stack example"
 dark="true"
 code={require("raw-loader!./snippets/stack_extra.jsx")}
