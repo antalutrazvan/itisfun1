@@ -1,10 +1,10 @@
-// Well, a name binding is simply a 'variable'.
+// They can be variables.
 
-var iance = 1;
-const struction = "H";
-let mego = 2;
+var a = 1;
+const b = 2;
+let c = {};
 
-// but it can also be, a named function.
+// or function declarations.
 
 function increment(x) {
   return ++x;

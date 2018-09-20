@@ -14,17 +14,3 @@ console.log(message);
 message = 'Hello World';
 
 console.log(message); // 'Hello World'
-
-
-function log() {
-  console.log(msg);  // undefined
-
-  var msg ='Hello World';
-}
-
-//the interpreter will see:
-function log() {
-  var msg;
-  console.log(msg);
-  msg='Hello World';
-}

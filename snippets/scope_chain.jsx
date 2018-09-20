@@ -1,18 +1,20 @@
-const sixSquared = square(6);
+one();
+// a b c
 
-function square(number) {
-  const squared = number * number;
+function one() {
+	var a = 'a';
+  
+  two();
 
-  function nullIfOdd() {
-    const secretResult = squared % 2 ? squared : 0 ;
+  function two() {
+		var b = "b";
+ 		
+    three();
 
-    return secretResult;
+    function three() {
+    	var c = "c";
+      
+      console.log(a,b,c); 
+    }
   }
-
-  const result = nullIfEven();
-
-  console.log(secretResult, squared, result);
-  // undefined, 36, 36
-
-  return result;
 }

@@ -7,3 +7,30 @@ export { future as theme } from 'mdx-deck/themes'
  - they are groups of statements or expressions - `function body`
  - that can be `called` - either externaly or internaly (recursion)
  - they can recieve `arguments` for each `call` and can `return` a value at any point during execution.
+---
+<CodeSurfer 
+title="Closure - Extra"
+theme={nightOwl}
+notes="shared stack example"
+dark="true"
+code={require("raw-loader!./snippets/stack_extra.jsx")}
+steps={[
+  {lines: [1, 40], notes: "we'll create a function that recieves a context"},
+  {lines: [1, 40], notes: "and invoke it immediately"},
+  {lines: [1, 2 ], notes: "we'll define a stack (array)"},
+  {range: [15, 38], notes: "and some functions to interact with it"},
+  {lines: [1, 4,5,6,7,8,9,10,11,12,13], notes: "on the context (window in our case) we'll add a function to return an interface object"},
+  {lines: [1, 4,5,6,7,8,9,10,11,12,13], notes: "we could just set the object, but this is safer, as each call gets us a new interface"},
+  {lines: [42, 43], notes: "we can now get an interface instance" },
+  {range: [42, 48], notes: "and play around with it" },
+  {range: [51, 52], notes: "if we get another interface" },
+  {range: [51, 54 ], notes: "and play around with that" },
+  {range: [51, 58], notes: "we're modifing the shared `stack`" },
+  {range: [51, 59], notes: "which is kept in a closure" },
+  {range: [1, 59]},
+]}  
+/>
+---
+I encourage you to dig deeper into this, and experiment as much as you can.
+They are concepts that will help you greatly in understanding and writing code.
+And inch you closer to the goal of delivering better, more interesting products.

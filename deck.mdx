@@ -1,54 +1,54 @@
 export { future as theme } from 'mdx-deck/themes'
 import { CodeSurfer } from "mdx-deck-code-surfer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
+import { Image } from 'mdx-deck'
 
-# `IT should be Fun` 
+
+
+<img src='./assets/logo.png' />
 
 ### Session One
 
 ---
 
-Let's talk about some interesting, but often confusing topics:
-
-- Scope
-- Hoisting
-- Closures
+### Scope
+### Hoisting
+### Closures
 
 ---
-## Scope
+### Scope
 
-"Scope refers to the `part` of a program where a `name binding` can be defined and is visible."
-
----
-What's a name binding you may ask?
+"Scope is the `part` or `section` of a program where a `definition` is visible."
 
 ---
 <CodeSurfer 
 theme={nightOwl}
-notes="what are name bindings? "
+notes="what is a definiton?"
 dark="true"
 code={require("raw-loader!./snippets/vars.jsx")}
 steps={[
-  { lines: [3, 4, 5], notes: "variable declaration"},
-  { lines: [8, 9, 10], notes: "function declaration" }
+  { range: [3, 5], notes: "variables"},
+  { range: [9, 11], notes: "named functions" }
 ]}  
 />
 
 ---
+ **Scope** can be clasified as:
+- `global`
+- `module`
+- `file`
+- `function` 
+- `block`
+- `expression`
+---
+JavaScript has `global` and `function` scope.
 
-Now that that's out of the way, let's get back to **scope**.
+`block` scope was added as part of the `ES6` spec.
 
 ---
- *Scope* can be:
-- global
-- file
-- module
-- function 
-- block
----
-JavaScript has `global` and `function` scopes.
+ ### GLOBAL SCOPE
 
-`block` scope was added as part of `ES6`.
+ "A `variable` is visible to the `whole` program after it was `declared`."
 
 ---
 <CodeSurfer 
@@ -56,51 +56,52 @@ title="Global Scope"
 theme={nightOwl}
 notes="global scope"
 dark="true"
-code={require("raw-loader!./snippets/global_cards.html")}
+code={require("raw-loader!./snippets/global_numbers.html")}
 steps={[
-  { lines: [1,2,4,5,6,9], notes: "let's load 2 separate scripts"},
-  { range: [1,3], notes: "One with an array of cards"},
-  { lines: [7], notes: "And one to log it" },
-  { lines: [8], notes: "`cards` is visible" },
-  { lines: [8], notes: "because it was defined in the global scope" },
-  { lines: [8], notes: "it can also be accessed through: `window.cards`" },
-  { range: [1, 9] }
+  { lines: [1,3,5,8], notes: "let's load 2 separate scripts"},
+  { range: [1,3], notes: "define a variable in one"},
+  { range: [5,8], notes: "And try to log it in the other" },
+  { range: [1, 8], notes: "`numbers` is declared in the global scope and visible" },
+  
 ]}  
 />
 ---
-We can throw a wrench in this, by creating a `function`.
----
-Let's look at a definition of what function scope is, and then modify our previous snippet.
----
 ### Function Scope
 
-A programming language has function scope when: 
-
-"A `function` `body` will automatically define a `variable` or `name context` when it it `called`."
-
+"When `called`, a `function` `body` will define a new `context`, where `variables` will be visible in it, but not outside of it."
 ---
 <CodeSurfer 
 title="Function Scope"
 theme={nightOwl}
 notes="function scope"
 dark="true"
-code={require("raw-loader!./snippets/local_cards.html")}
+code={require("raw-loader!./snippets/local_numbers.jsx")}
 steps={[
-  { lines: [1,2,8, 9,10,18], notes: "let's load 2 separate scripts again"},
-  { range: [3,7], notes: "One with a function that creates and returns some cards"},
-  { lines: [11, 13, 16], notes: "and one to call the function and log the array" },
-  { lines: [13, 14], notes: "`cards` is undefined in the global scope" },
-  { lines: [3, 4], notes: "it exists in the scope of `getSomeCards`" },
-  { lines: [11, 16, 17], notes: "our new variable `actualCards` is a reference to it" },
-  { range: [1, 18] }
+  { range: [1,4], notes: "let's declare a count function"},
+  { range: [1,6], notes: "we call it"},
+  { range: [1,8], notes: "if we try to log numbers, it will throw an error"},
+]}  
+/>
+---
+ Important to note:
+
+ All `undeclared` variable assignments inside a script, wether inside a `function` or not, will be added by the `interpreter` to the `global` scope.
+---
+<CodeSurfer 
+theme={nightOwl}
+notes="it's the same script from before"
+dark="true"
+code={require("raw-loader!./snippets/scope_gotcha.jsx")}
+steps={[
+  { lines: [2], notes: "but we dont `declare` numbers, we just initialize it"},
+  { range: [1, 8], notes: "if we log it outside the scope, it will be defined globally"},
 ]}  
 />
 ---
 
 ### Block scope
 
-  "A programing language has `block` level scope, if a `{}` `block` (or some other sintax)
-  defines a variable scope."
+"A code `block` (usually `{}` but it can be some other sintax) defines a new `name context`."
 
 ---
 <CodeSurfer 
@@ -110,54 +111,48 @@ notes="simple block scope example"
 dark="true"
 code={require("raw-loader!./snippets/block_scope.jsx")}
 steps={[
-  { lines: [1,2,21], notes: "the `main` function will be our first scope"},
-  { lines: [1,2,3,21], notes: "it defines a `counter` variable with the value 2"},
-  { lines: [1,2,3, 16, 21], notes: "and increments it"},
-  { lines: [1,2,3, 16, 17, 18, 19, 20, 21], notes: "the result will be 3"},
-  { lines: [5,6, 14], notes: "we define a block before incrementing counter"},
-  { lines: [5,6, 7, 14], notes: "with it's own counter variable"},
-  { lines: [5,6, 7, 9, 14], notes: "and increment that"},
-  { lines: [5,6, 7, 9, 10, 11, 12, 13, 14], notes: "the result will be 4, because it's referencing counter from within the block"},
-  { lines: [5, 6, 7], notes: "This works because we use `let` to define the block scoped variable"},
-  { lines: [5, 6, 7], notes: "using var, we would overwrite the counter variable" },
+  { lines: [1,2,16], notes: "the `main` function will be our first scope"},
+  { lines: [1,2,3,16], notes: "it declares a `counter` variable with the value 2"},
+  { lines: [1,2,3,5, 16], notes: "and increments it"},
+  { lines: [1,2,3,5,6, 16], notes: "counter will be 3"},
+  { lines: [1,2,3,5,6, 8,9,14, 16], notes: "if we declare a block"},
+  { lines: [1,2,3,5,6, 8,9, 10, 14, 16], notes: "and declare counter again with value 3"},
+  { lines: [1,2,3,5,6, 8,9, 10, 12, 14, 16], notes: "and increment it"},
+  { lines: [1,2,3,5,6, 8,9, 10, 12, 13, 14, 16], notes: "the value will be 4"},
+  { lines: [10], notes: "this works because we used `let` to declare counter again, inside the block"},
   { range: [1, 21] }
 ]}  
 />
 ---
 
-We're almost done with `scopes`.
-
 An important feature to note is that nested function `scopes` are `chained`.
 
-What that means is that, an `inner function`, has access to all the variables of an `outer function`.
-But not the inverse.
+What that means is that, an `inner function`, can reference all the variables that it's `outer function` can.
 
 ---
 <CodeSurfer 
 title="Scope Chaining"
 theme={nightOwl}
-notes="square number example"
+notes="scope chains"
 dark="true"
 code={require("raw-loader!./snippets/scope_chain.jsx")}
 steps={[
-  { lines: [1, 3, 4, 18], notes: "let's create a function to square a number" },
-  { lines: [1, 3, 4, 12, 16,  17], notes: "but because programmers are mischevious creatures" },
-  { lines: [6, 7, 9, 10, 18, 17], notes: "let's nest a function that will return 0 if the square is even" },
-  { lines: [4, 7, 12, 14], notes: "if we log each variable..." },
-  { lines: [14, 15], notes: "we can see that secretResult is undefined" },
-  { lines: [14, 15], notes: "but result was referenced correctly" },
-  { range: [1, 18] },
+  { lines: [1, 4, 20], notes: "let's create a function with a variable inside it" },
+  { lines: [1, 4, 7, 9, 10, 19, 20], notes: "it declares another function with it's own variable" },
+  { range: [1, 20], notes: "and a third one" },
+  { lines: [1,2], notes: "the call to `one` will output all the variables" },
+  { range: [1, 20] },
 ]}  
 />
 ---
 
-Why could I `call` `square(6)` if I defined it after ?
+Why could I `call` all those `functions`, before I defined them ?
 
 Well, it works because of `hoisting`.
 ---
 ### Hoisting
 
-Hoisting is a feature where `variable` and `named` `function` declarations are moved to the `top` of their scope.
+`hoisting` is a behaviour where `variable` and `named` `function` declarations are moved to the `top` of their `scope`.
 
 ---
 <CodeSurfer 
@@ -172,11 +167,9 @@ steps={[
   { lines: [4], notes: "then declare, and assign a value to it." },
   { lines: [6], notes: "then then log it again." },
   { range: [1, 2], notes: "We would expect a ReferenceError at the first log" },
-  { range: [1, 7], notes: "but because of variable hoisting" },
+  { range: [1, 7], notes: "but because of hoisting" },
   { range: [9, 16], notes: "The interpeter will read this" },
-  { range: [18, 22], notes: "same behaviour for function scopes" },
-  { range: [25, 30], notes: "the interpreter will see" },
-  { range: [1, 30] },
+  { range: [1, 16] },
 ]}  
 />
 ---
@@ -200,13 +193,12 @@ We can use this code to create a `wallet`. that will keep a private record of ou
 Doing this, we'll get to make use of `Closures`.
 
 ---
-`closures` are the ability of an inner function to have access to the scope above them,
-even after the function that defined the scope has finished executing.
+We say that a `variable` is `kept` in a `closure` when it is referenced by another `function` after the function that `defined it` has `finished execution`.
 ---
 <CodeSurfer 
 title="Closure"
 theme={nightOwl}
-notes="logger example"
+notes="wallet example"
 dark="true"
 code={require("raw-loader!./snippets/closure_bank.jsx")}
 steps={[
@@ -214,14 +206,15 @@ steps={[
   { lines: [1, 2, 13], notes: "we'll keep a variable to store our `money` and set it to `amount`" },
   { lines: [1, 2, 4,5,6, 13], notes: "we'll create a function to add a value to our current amount" },
   { lines: [1, 2, 4,5,6, 8,9,10, 13], notes: "and one to view our current amount" },
+  { lines: [1, 2, 4,5,6, 8,9,10,12, 13], notes: "and return an object with those functions as properties" },
   { range: [1, 15], notes: "we can then create our wallet" },
   { range: [1, 17], notes: "add to it" },
   { range: [1, 18], notes: "and see how much we have" },
-  {range: [1, 18]},
+  { range: [1, 18] },
 ]}  
 />
 ---
- Here's a more simple example
+ Here's another example
 ---
 <CodeSurfer 
 title="Closure - Extra"
@@ -244,43 +237,18 @@ steps={[
 ]}  
 />
 ---
-  We can make use of our knowledge of `closures`, `hoisting` and `scopes` to create interesting scripts.
-  Closures for example are useful for creating `private` variables.
+## Thank you
 ---
-<CodeSurfer 
-title="Closure - Extra"
-theme={nightOwl}
-notes="shared stack example"
-dark="true"
-code={require("raw-loader!./snippets/stack_extra.jsx")}
-steps={[
-  {lines: [1, 40], notes: "we'll create a function that recieves a context"},
-  {lines: [1, 40], notes: "and invoke it immediately"},
-  {lines: [1, 2 ], notes: "we'll define a stack (array)"},
-  {range: [15, 38], notes: "and some functions to interact with it"},
-  {lines: [1, 4,5,6,7,8,9,10,11,12,13], notes: "on the context (window in our case) we'll add a function to return an interface object"},
-  {lines: [1, 4,5,6,7,8,9,10,11,12,13], notes: "we could just set the object, but this is safer, as each call gets us a new interface"},
-  {lines: [42, 43], notes: "we can now get an interface instance" },
-  {range: [42, 48], notes: "and play around with it" },
-  {range: [51, 52], notes: "if we get another interface" },
-  {range: [51, 54 ], notes: "and play around with that" },
-  {range: [51, 58], notes: "we're modifing the shared `stack`" },
-  {range: [51, 59], notes: "which is kept in a closure" },
-  {range: [1, 59]},
-]}  
-/>
----
-I encourage you to dig deeper into this, and experiment as much as you can.
-They are concepts that will help you greatly in understanding and writing code.
-And inch you closer to the goal of delivering better, more interesting products.
----
+
+You can clone this repo and access aditional snippets that were not used the presentation. 
 You can play around with these snippets, or make your own.
+
+I encourage you to seek out more information regarding these topics, and experiment at your own pace.
+
 And you can find out more about these concepts here:
 [https://hackernoon.com/execution-context-in-javascript-319dd72e8e2c](https://hackernoon.com/execution-context-in-javascript-319dd72e8e2c)
 [https://scotch.io/tutorials/understanding-hoisting-in-javascript](https://scotch.io/tutorials/understanding-hoisting-in-javascript)
 [https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8](https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8)
 
-Good reads:
 [JavaScript the Good Parts](http://shop.oreilly.com/product/9780596517748.do)
 ---
-# Thank you
