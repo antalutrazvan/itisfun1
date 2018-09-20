@@ -15,4 +15,4 @@ function wallet(amount) {
 var myWallet = wallet(0);
 
 myWallet.add(40);
-myWallet.value() // 30
+myWallet.value() // 40

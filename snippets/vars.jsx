@@ -7,5 +7,5 @@ let c = {};
 // or function declarations.
 
 function increment(x) {
-  return ++x;
+  return x + 1;
 }
